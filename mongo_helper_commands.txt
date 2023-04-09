@@ -1,0 +1,2 @@
+#Load CSV data file in mongodb
+mongoimport --db Vehicles --collection electric --type csv --file /home/student/data.csv --headerline
