@@ -1,7 +1,6 @@
 import pprint
 from flask import Flask
 from pymongo import MongoClient
-db = MongoClient().Vehicles
 from bson.son import SON
 from bson.objectid import ObjectId
 import gridfs
@@ -9,6 +8,7 @@ from flask import request
 import json
 
 app = Flask(__name__)
+db = MongoClient().Vehicles
 
 @app.route('/')
 def index():
