@@ -14,7 +14,7 @@ db = MongoClient().Vehicles
 def index():
     return 'Welcome to BGG Search !!'
 
-@app.route('/globalSearch', methods=['POST'])
+@app.route('/globalSearch', methods=['POST'] )
 def global_search():
     #read string from frontend ["search string" either `county` or `electric vehicle type`]
     data = json.load(request.get_json())
@@ -41,8 +41,8 @@ def global_search():
     #return array of records
     return {"data":{"information":result}}
 
-@app.route('/globalLocationSearch', methods=['POST'])
-def global_search():
+@app.route('/globalLocationSearch', methods=['POST'] )
+def global_location_search():
     #read string from frontend [ "lat,long" , "within"]
     data = json.load(request.get_json())
     latitude = data['latitude']
@@ -60,7 +60,7 @@ def global_search():
     return {"data":{"information":result}}
 
 @app.route('/filteredSearch', methods=['POST'])
-def global_search():
+def global_filtered_search():
     #read string from frontend [ "_id "]
     data = json.load(request.get_json())
     id = data['id']
@@ -89,7 +89,7 @@ def global_search():
     return {"data":{"image": image_content,"information":result}}
 
 @app.route('/addComments', methods=['POST'])
-def global_search():
+def add_comments():
     #read string from frontend [ "_id "]
     data = json.load(request.get_json())
     id = data['id']
