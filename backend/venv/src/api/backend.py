@@ -39,7 +39,7 @@ def global_search():
 
 
     #return array of records
-    return "global search"
+    return {"data":{"information":result}}
 
 @app.route('/globalLocationSearch', methods=['POST'])
 def global_search():
@@ -57,7 +57,7 @@ def global_search():
         pprint.pprint(each_record)
 
     #return array of records
-    return "global location search"
+    return {"data":{"information":result}}
 
 @app.route('/filteredSearch', methods=['POST'])
 def global_search():
@@ -79,14 +79,14 @@ def global_search():
     query = {"electricid": id}
     result = db.electric.find_one(query)
     print(result)
-
-    query = {"geoelectricid": id}
-    result = db.Geoelectric.find_one(query)
-    print(result)
+    if result == None:
+        query = {"geoelectricid": id}
+        result = db.Geoelectric.find_one(query)
+        print(result)
 
 
     #return text + image + comments
-    return "filtered search"
+    return {"data":{"image": image_content,"information":result}}
 
 @app.route('/addComments', methods=['POST'])
 def global_search():
@@ -100,13 +100,18 @@ def global_search():
     query = {"electricid": id}, {"$push": {"annotations": record}}
     result = db.electric.update_one(query, upsert=True)
     print(result)
-
-    query = {"geoelectricid": id}, {"$push": {"annotations": record}}
-    result = db.Geoelectric.update_one(query, upsert=True)
-    print(result)
+    if result['modifiedCount'] == 0:
+        query = {"geoelectricid": id}, {"$push": {"annotations": record}}
+        result = db.Geoelectric.update_one(query, upsert=True)
+        print(result)
+    
+    if result['modifiedCount'] == 0:
+        msg = "Failure to update"
+    else:
+        msg = "Successfully updated"
 
     #return boolean
-    return "add comments True/ False"
+    return {"data":{"message":msg}}
 
 
 
