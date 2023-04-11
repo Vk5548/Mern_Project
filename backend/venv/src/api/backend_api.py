@@ -130,7 +130,7 @@ def global_filtered_search():
         print(metadata)
     grid_out = fs.get(metadata['_id'])
     image_content = str(base64.b64encode(grid_out.read()))
-    print(image_content)
+    #print(image_content)
 
 
     #return text + image + comments
