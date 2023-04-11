@@ -2,6 +2,8 @@
 
 # Reactjs, Tevin CSS, AXIOS CSS
 
+NOTE: If user wants to search for new query user needs to refresh and go to initial node url and refresh.
+
 This project has two components:
 A. Backend: This is where we have written our API's and this component talks with mongodb database.
 B. Frontend: This is where users search for the vehicle based on ElectricVehicleType or location.
@@ -10,27 +12,35 @@ Requirements:
 A. pip3 & npm module should be installed.
 
 Setup:
-A. Backend: 
-    - Dependency Installation:
-        1. pip3 install -r backend/requirements.txt
-    - Run:
-        1. python3 backend/venv/src/api/backend_api.py
+A. Backend: - Dependency Installation: 1. pip3 install -r backend/requirements.txt - Run: 1. python3 backend/venv/src/api/backend_api.py
 
 This will run the flask server with backend api's on port 5001
 
-B. Frontend:
-    - Dependency Installation:
-        1. npm install client/my-search-app/package.json
-        2. npm install axios // to conect to an end-point
-    - Run: 
-        1. npm start
+B. Frontend: - Dependency Installation: 1. npm install client/my-search-app/package.json 2. npm install axios // to conect to an end-point - Run: 1. npm start
 This will start server where we have hosted our frontend on port 3000
 
 To run on RLES:
+
 1. cd /home/student/mongo-project-geek-army
 2. python3 backend/venv/src/api/backend_api.py # start backend on port 5001
 3. cd /home/student/mongo-project-geek-army/client/my-search-app
 4. npm start # start frontend on port 3000
 
-Note: 1. Search can only be done on `Electric Vehicle Type` ("battery" or "plug" or any other field)
-      2. Searc can be done using latitude or longitude
+Note: 1. Search can only be done on `Electric Vehicle Type` ("battery" or "plug" or any other field) 2. Searc can be done using latitude or longitude
+
+Partial implementation done:
+
+1. When data is search by `location` frontend is able to render the data correctly. After when user clicks specific vehicle, frontend fails to render the data received from backend due to some `_id` issue. We are working on this :)
+
+2. Comments integration of frontend and backend is remaining. We have written frontend and backend component for comments.
+   Below are the postman screenshots for `addcomments` api:
+
+![og](og.png)
+
+![onedb](onedb.png)
+
+![oneresponse](oneresponse.png)
+
+![aftersecond](aftersecond.png)
+
+![twpresponse](tworesponse.png)
