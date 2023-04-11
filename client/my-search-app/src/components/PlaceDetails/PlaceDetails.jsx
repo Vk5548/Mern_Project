@@ -56,7 +56,7 @@ const PlaceDetails = () => {
         temp = temp.replace("\'","");
         let imgString = "data:image/jpg;base64,"
         imgString += temp
-        console.log(imgString)
+        //console.log(imgString)
 
         setImgUrl(imgString);
 
