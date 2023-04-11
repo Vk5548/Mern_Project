@@ -10,8 +10,12 @@ from bson import json_util
 from bson.objectid import ObjectId
 import base64
 
+# new import
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 db = MongoClient().Vehicles
 
 @app.route('/')
@@ -20,36 +24,37 @@ def index():
 
 @app.route('/globalSearch', methods=['POST'] )
 def global_search():
-    #read string from frontend ["search string" either `county` or `electric vehicle type`]
+    print("called")
+    #read string from frontend ["search string" electric vehicle type`]
     data = request.json
-    county = data['county']
+    #county = data['county']
     evt = data['evt']
+    print(data)
     
     #mongo regex query
     query = {
-        "$or": [
-                {{'County':
-                {
-                '$regex': ""          
-                }},
-                {'ElectricVehicleType':
-                    {
-                        '$regex': evt+'*'
-                    }} }
-            ,
-                {'County':
-                {
-                '$regex': county+"*"          
-                }},
-                {'ElectricVehicleType':
-                    {
-                        '$regex': evt+'*'
-                    }} 
-            ]
+            
+        # 'County':
+        #     {
+        #         '$regex':  ""           
+        #     }
+        #     ,
+         'ElectricVehicleType':
+             {
+                '$regex': evt+'*',
+                "$options": "i"
+             }
 
-              
+        #"$or": [
+        #    { "County": { "$regex": '^search_string$', "$options": 'i' } },
+        #    { "ElectricVehicleType": { "$regex": '^search_string$', "$options": 'i' } }
+        #]
+            
+
+            
     }
     result = db.electric.find(query)
+    # print(type(result))
     response = []
     for each_record in result:
         each_record["_id"] = str(each_record["_id"])
@@ -64,7 +69,8 @@ def global_search():
 @app.route('/globalLocationSearch', methods=['POST'] )
 def global_location_search():
     #read string from frontend [ "lat,long" , "within"]
-    data = request.json
+    data = request.json['latitude']
+    print(data)
     latitude = float(data['latitude'])
     longitude = float(data['longitude'])
     range = int(data['range'])
@@ -88,7 +94,7 @@ def global_location_search():
     for each_record in result:
         each_record["_id"] = str(each_record["_id"])
         response.append(each_record)
-
+    print(response)
     #return array of records
     return json.dumps({"data":{"information":response}})
 
@@ -96,7 +102,9 @@ def global_location_search():
 def global_filtered_search():
     #read string from frontend [ "_id "]
     data = request.json
+    print(data)
     id = data['id']
+    print(id)
     
     
     #mongo `_id` query in both (Geo and non geo and comments) collection along with images & comments.
@@ -112,11 +120,11 @@ def global_filtered_search():
     fs = gridfs.GridFS(db)
     metadata = db.fs.files.find_one({'electricid': ObjectId(id)})
     print(metadata)
-    if len(metadata) == 0:
+    if metadata == None:
         metadata = db.fs.files.find_one({'geoelectricid': ObjectId(id)})
         print("Inside IFF")
         print(metadata)
-    if len(metadata) == 0:
+    if metadata == None:
         metadata = db.fs.files.find_one({'geoelectricid':0})
         print("DEFAULT")
         print(metadata)
@@ -157,4 +165,4 @@ def add_comments():
 
 
 
-app.run(host='0.0.0.0', port=81)
+app.run('0.0.0.0',port=5001)
