@@ -26,6 +26,7 @@ const PlaceDetails = () => {
   
 
   const [comment, setComment] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
 
   //need to call an api from id:
   const handleSubmit = async (event) => {
@@ -51,9 +52,13 @@ const PlaceDetails = () => {
         // console.log(data);
         const docs = response.data.data.information;
         let img =response.data.data.image;
-        const imgString = `data:image/png;base64,${response.data.data.image}`
+        let temp = `${response.data.data.image}`.replace("b\'","");
+        temp = temp.replace("\'","");
+        let imgString = "data:image/jpg;base64,"
+        imgString += temp
+        console.log(imgString)
 
-        
+        setImgUrl(imgString);
 
         if(docs){
           const newVehicles = {
@@ -113,7 +118,7 @@ const PlaceDetails = () => {
 
         <div className='place-details-content grid'>
           <div className='place-details-img'>
-            <img src = {vehicles.image?.coverImg} alt = "cover img" />
+            <img src ={imgUrl} />
           </div>
           <div className='place-details-info'>
           <div className='place-details-item title'>
