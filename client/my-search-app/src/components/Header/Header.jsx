@@ -24,12 +24,9 @@ const Header = () => {
             <Navbar />
             <div className="header-content flex flex-center text-center text-white">
                 <h2 className="header-title text-capitalize">
-                    find vehicles:
+                    BGG SEARCH
                 </h2><br />
-                <p className="header-text fs-18 fw-3">gibberish gibberish gibberish g
-                ibberish gibberish gibberish 
-                gibberish gibberish gibberish 
-                gibberish gibberish gibberish</p>
+                <p className="header-text fs-18 fw-3"> Search either by location or vehicle type</p>
                 {/* <SearchForm /> */}
                 
                 {showSearchForm ? <SearchForm /> : <SearchFormLocation />}

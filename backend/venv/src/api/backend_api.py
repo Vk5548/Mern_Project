@@ -69,7 +69,7 @@ def global_search():
 @app.route('/globalLocationSearch', methods=['POST'] )
 def global_location_search():
     #read string from frontend [ "lat,long" , "within"]
-    data = request.json['latitude']
+    data = request.json
     print(data)
     latitude = float(data['latitude'])
     longitude = float(data['longitude'])

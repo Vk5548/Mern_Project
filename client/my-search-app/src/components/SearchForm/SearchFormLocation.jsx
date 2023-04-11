@@ -38,11 +38,11 @@ const SearchFormLocation = () => {
       setResultTitle("Please Enter Something ...");
     } else {
       try {
-        const response = await VehicleService.getVehiclesByLocation({
-          latitude: tempLatitude,
-          longitude: tempLongitude,
-          range: tempDistance
-        });
+        const response = await VehicleService.getVehiclesByLocation(
+           tempLatitude,
+          tempLongitude,
+          tempDistance
+        );
 
         console.log("response getVehiclesByLocation")
         console.log(response)
