@@ -30,7 +30,7 @@ const PlaceList = () => {
         <div className='placelist-content grid'>
             {vehicles.map ? (
                  vehicles.map((item, index) => (
-                  <Place key={index} {...item} />
+                  <Place key={item.id} {...item} />
                   ))
              ) : (
                    <Place {...vehicles} />

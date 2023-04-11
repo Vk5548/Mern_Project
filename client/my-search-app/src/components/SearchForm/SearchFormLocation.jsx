@@ -48,7 +48,7 @@ const SearchFormLocation = () => {
         console.log(response)
         console.log(response.data.data.information)
         // console.log(response.data.information)
-        setVehicles(response.data.data.information);
+        // setVehicles(response.data.data.information);
         setResultVehicle("Your Results");
         // setSearchTerm(latitude.current.value);
       } catch (error) {

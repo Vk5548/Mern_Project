@@ -7,6 +7,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({children}) => {
     const [searchTerm, setSearchTerm] = useState("the lost world");
+    const [latSearch, setLatSearch] = useState("");
     const [vehicles, setVehicles] = useState([]); //all the result here
     const [loading, setLoading] = useState(true);
     const [resultVehicle, setResultVehicle] = useState("");
@@ -31,7 +32,7 @@ const AppProvider = ({children}) => {
             console.log(docs)
 
             if(docs){
-                const newVehicles = docs.slice(0, 20).map((vehicle) => {
+                const newVehicles = docs.map((vehicle) => {
                     const {_id, BaseMSRP, City, CleanAlternativeFuelVehicleEligibility, County, DOLVehicleID,
                         ElectricRange, ElectricUtility,
                         ElectricVehicleType, Latitude, Longitude, Make,
@@ -76,7 +77,7 @@ const AppProvider = ({children}) => {
             console.log(error);
             setLoading(false);
         }
-    }, [searchTerm]);
+    }, [searchTerm, latSearch]);
 
     useEffect(() => {
         fetchPlaces();
@@ -84,7 +85,7 @@ const AppProvider = ({children}) => {
 
     return (
         <AppContext.Provider value = {{
-            loading, vehicles, setSearchTerm, resultVehicle, setResultVehicle, setVehicles, setLoading,
+            loading, vehicles, setSearchTerm, resultVehicle, setResultVehicle, setVehicles, setLoading, latSearch, setLatSearch,
         }}>
             {children}
         </AppContext.Provider>

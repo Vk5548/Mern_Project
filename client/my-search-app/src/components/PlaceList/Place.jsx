@@ -5,7 +5,7 @@ import "./PlaceList.css";
 import coverImg from "../../images/no_place_found.jpg";
 
 const Place = (place) => {
-  console.log("----ID to be sent----- "+place.id)
+  // console.log("----ID to be sent----- "+place.id)
   const vehicle = [{vin: '5YJ3E1EA8K',
   Make: 'TESLA',
   Model: 'MODEL 3',

@@ -32,7 +32,7 @@ const PlaceDetails = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await VehicleService.sendComment(vehicles[0].id, comment);
+      await VehicleService.submitComments(vehicles[0].id, comment);
       setComment('');
     } catch (error) {
       console.log(error);

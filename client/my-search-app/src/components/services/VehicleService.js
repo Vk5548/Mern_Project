@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const USER_API_BASE_URL = "http://10.181.91.156:81/";
-const USER_API_BASE_URL = "https://localhost/";
+const USER_API_BASE_URL = "https://1311-50-30-232-30.ngrok-free.app/";
 
 class VehicleService {
 
@@ -27,7 +27,8 @@ class VehicleService {
     }
 
     submitComments(id, comments){
-        console.log("called")
+        console.log("D debug")
+        console.log(id)
         return axios.post(USER_API_BASE_URL + "addComments", {
             id: id,
             comments: comments
